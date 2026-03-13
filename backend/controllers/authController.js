@@ -4,7 +4,7 @@ const generateToken = require("../utils/generateToken");
 // Register user
 exports.registerUser = async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
+    const { name, email, password, role, service, city, area } = req.body;
 
     const userExists = await User.findOne({ email });
 
@@ -16,7 +16,12 @@ exports.registerUser = async (req, res) => {
       name,
       email,
       password,
-      role
+      role,
+      service, // added
+      location: { // added
+        city,
+        area
+      }
     });
 
     res.status(201).json({
